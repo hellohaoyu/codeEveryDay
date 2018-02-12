@@ -54,8 +54,28 @@ class SolutionTwo(object):
             if charMap[cIndex] < 0:
                 return chr(cIndex + self.BASE_LOWER_CASE_UNICODE)
 
+class SolutionThree(object):
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        
+        # Testing case 1: "a", "ab"
+        # Testing case 2: "a", "aa"  -> Missing!!!
+        # Testing case 3: "abc", "bdca"
+        rs = 0
+        for sC in s:
+            rs ^= ord(sC)
+        for tC in t:
+            rs ^= ord(tC)
+        
+        return chr(rs)
+
 # s = Solution()
-s = SolutionTwo()
+# s = SolutionTwo()
+s = SolutionThree()
 
 print s.findTheDifference("a", "aa")
 print s.findTheDifference("a", "ab")
