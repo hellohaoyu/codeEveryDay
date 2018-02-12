@@ -73,6 +73,13 @@ class SolutionThree(object):
         
         return chr(rs)
 
+        # Similar variations
+        # rs = ord(t[-1])
+        # for i in xrange(len(s)):
+        #     rs ^= ord(t[i])
+        #     rs ^= ord(s[i])
+        # return chr(rs)
+
 # s = Solution()
 # s = SolutionTwo()
 s = SolutionThree()
