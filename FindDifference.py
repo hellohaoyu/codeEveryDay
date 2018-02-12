@@ -29,8 +29,35 @@ class Solution(object):
                 charMap[tC] -= 1
                 if charMap[tC] < 0:
                     return tC
-s = Solution()
+
+class SolutionTwo(object):
+    BASE_LOWER_CASE_UNICODE = ord('a')
+    NUM_OF_CHARS = 26 
+    def findTheDifference(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        
+        # Testing case 1: "a", "ab"
+        # Testing case 2: "a", "aa"  -> Missing!!!
+        # Testing case 3: "abc", "bdca"
+        charMap = [0] * self.NUM_OF_CHARS
+        for sC in s:
+            cIndex = ord(sC) - self.BASE_LOWER_CASE_UNICODE
+            charMap[cIndex] += 1 
+
+        for tC in t:
+            cIndex = ord(tC) - self.BASE_LOWER_CASE_UNICODE
+            charMap[cIndex] -= 1 
+            if charMap[cIndex] < 0:
+                return chr(cIndex + self.BASE_LOWER_CASE_UNICODE)
+
+# s = Solution()
+s = SolutionTwo()
 
 print s.findTheDifference("a", "aa")
 print s.findTheDifference("a", "ab")
 print s.findTheDifference("abc", "bcda")
+print s.findTheDifference("abbbbc", "abbkbbc")
