@@ -15,20 +15,20 @@ class Solution(object):
         # Testing case 1: "a", "ab"
         # Testing case 2: "a", "aa"  -> Missing!!!
         # Testing case 3: "abc", "bdca"
-        charSet = {}
-        for c in s:
-            if c in charSet:
-                charSet[c] += 1 
+        charMap = {}
+        for sC in s:
+            if sC in charMap:
+                charMap[sC] += 1 
             else:
-                charSet[c] = 1
+                charMap[sC] = 1
                 
-        for l in t:
-            if l not in charSet:
-                return l
+        for tC in t:
+            if tC not in charMap:
+                return tC
             else:
-                charSet[l] -= 1
-                if charSet[l] < 0:
-                    return l
+                charMap[tC] -= 1
+                if charMap[tC] < 0:
+                    return tC
 s = Solution()
 
 print s.findTheDifference("a", "aa")
