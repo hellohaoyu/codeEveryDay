@@ -16,7 +16,7 @@
 # The hour must not contain a leading zero, for example "01:00" is not valid, it should be "1:00".
 # The minute must be consist of two digits and may contain a leading zero, for example "10:2" is not valid, it should be "10:02".
 
-class Solution(object):
+class SolutionOne(object):
     def readBinaryWatch(self, num):
         """
         :type num: int
@@ -56,7 +56,23 @@ class Solution(object):
         return ones
 
 
-s =  Solution()
+class SolutionTwo(object):
+    def readBinaryWatch(self, num):
+        """
+        :type num: int
+        :rtype: List[str]
+        """
+        rs = []
+        for hour in xrange(12):
+            for minute in xrange(60):
+                if bin(hour).count('1') + bin(minute).count('1') == num:
+                    rs.append('%d:%02d' % (hour, minute))
+        # Learn to use bin() and str.count()
+        # Learn to use '%d:%02d' % (hour, minute)            
+        
+        return rs
+
+s =  SolutionTwo()
 
 print s.readBinaryWatch(1)
 print s.readBinaryWatch(2)
