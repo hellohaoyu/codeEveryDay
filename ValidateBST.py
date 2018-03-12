@@ -54,4 +54,25 @@ class Solution(object):
                     q.append(cur.right)
             
         return True
+
+# Recursion method
+# Remember to pass max/min values for subtree!!
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+        return self.isValidBSTHelper(root, -sys.maxint, sys.maxint)
+    
+    def isValidBSTHelper(self, root, minVal, maxVal):
+        if not root:
+            return True
+        
+        if root.val <= minVal or root.val >= maxVal:
+            return False
+        
+        return self.isValidBSTHelper(root.left, minVal, root.val) and self.isValidBSTHelper(root.right, root.val, maxVal)
                 
