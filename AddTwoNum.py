@@ -38,7 +38,7 @@ class Solution(object):
         rs = ListNode(0)
         curRs = rs
         while cur1 and cur2:
-            curVal = cur1.val + cur2.val + inc=
+            curVal = cur1.val + cur2.val + inc
             if curVal >= 10:
                 curVal %= 10
                 inc = 1  

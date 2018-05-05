@@ -1,0 +1,16 @@
+1. What if there is a tie? What if there are duplicate results?
+2. Could I assume all the inputs are lowercase?
+3. Could we have negative number?
+4. contains duplicates in the list?
+5. sorted?
+
+
+nums.sort()  => correct!!
+update s and e every condition!!
+
+
+3 sum testing cases:
+
+1. [-1, 0, 1, 2, -2]
+2. [-1, 0, 1, 2, -2, 2]
+3. [-1, 0, 1]
