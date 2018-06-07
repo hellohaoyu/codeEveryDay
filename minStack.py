@@ -115,3 +115,51 @@ class MinStack(object):
         """
         if self.minVals:
             return self.minVals[-1]
+
+
+
+# Use heapq, but remember the right way to get the minVal from heaplist
+# nsmallest(k, heap) => return a list of top k values. Remember you can't get the min value from heap[0]
+import heapq
+
+class MinStack(object):
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        self.heapStack = []
+        heapq.heapify(self.heapStack)
+        
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: void
+        """
+        self.stack.append(x)
+        heapq.heappush(self.heapStack, x)
+        
+
+    def pop(self):
+        """
+        :rtype: void
+        """
+        if self.stack:
+            val = self.stack.pop()
+            self.heapStack.remove(val)
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        if self.stack:
+            return self.stack[-1]
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        if self.heapStack:
+            return heapq.nsmallest(1, self.heapStack)[0]

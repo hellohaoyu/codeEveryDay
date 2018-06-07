@@ -30,6 +30,26 @@ class Solution(object):
         return False    
 
 
+# Another try: Nussed the case where stack is empty and cause out of index error when applying stack[-1].
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str   # {)}
+        :rtype: bool
+        """
+        stack = []
+        for c in s:
+            if c in ['(', '{', '[']:
+                stack.append(c)
+            else:
+                if stack and ((c == ')' and stack[-1] == '(') or (c == '}' and stack[-1] == '{') or  (c == ']' and stack[-1] == '[')):
+                    stack.pop()
+                else:
+                    return False
+        
+        return not stack
+        
+
 class Solution(object):
     def isValid(self, s):
         """
