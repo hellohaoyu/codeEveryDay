@@ -1,0 +1,196 @@
+1. 设计数据库存储houzz用户的idea book，里面可以放照片，然后问要建哪些表，表里的column都是什么，最后写的query
+
+
+2. 
+
+
+Foundation: 
+
+1. TreeMap vs hashMap
+   TreeMap -> Sorted key and implemnted by tree, logn -> delete, add and has
+   hashMap -> not sorted key, O(1) for delete, add, has, but just no sorted.
+
+2. HashMap vs HashTable  => https://stackoverflow.com/questions/40471/differences-between-hashmap-and-hashtable
+   hashMap -> Allow key to be null, HashTable -> not allow key to be null
+   hashMap -> not synchronized, HashTable -> synchronized
+
+
+
+
+3. HTTP Request: GET vs. POST vs. PUT，能不能互相换着用
+    
+
+
+4. Scalability. Now we have one server, one database, what if response time is slow? How to optimize?
+5. What happens when entering www.google.com (send get request, DNS, load balancer, server, find static file or go into MVC and database interactions, send back result)
+6. 
+
+
+What happens when www.google.com is typed in browsers?
+
+SQL query
+
+http tcp
+
+
+
+Coding题目也是出现过的：输入"rft567.908kih000000hh890jug678gtff567"这样包含字母和数字的字符串，找到出线次数最多的数字，print "567 shows two time"。
+
+1. test justification -> Onsite
+2. input 一个日期，即年月日，要求返回加上n天以后得到的日期。这题虽然不难但是corner case特别多
+3. 第一题是斐波那契数列，recursive & iterative各写一遍，问了时间空间复杂度，又做了优化到最优解。
+然后第二题是edit distance，这题我最近刚好刷过，就直接上最优解很快写完了
+4. 我们有一个爬虫，可以爬到很多父子关系，比如us -> ca, us-> tx, ca -> san jose, ca -> palo alto, tx -> austin等等，怎么建立这个数据结构，需要支持插入这些关系insertNode(Node father, Node son)（关系顺序是随机的），此外可以查询每个节点的子节点，比如getNodes(“us”) 然后return ‘ca’和’tx’。没有写代码，说了下思路，其实就是每一个node结构有名字和子节点，用一个map来存名字和node的对应map<string, node>，然后insert和get就很好做了
+
+Note: 需要考虑到，当子node已经存在于父node的子list当中的情况，以防止有重复的子node在父node的中。
+
+
+
+
+面经：
+1. Calculate the distance of bits between two integers
+2. Fibonacci, recursive + non recursive  -> time and space
+3. 2sum(LeetCode), no hashmap
+4. https://leetcode.com/problems/longest-mountain-in-array/description/
+不一样的是in addition要给出长方形的坐标，例如左上角点的坐标 
+
+
+
+题就一道: 设计一个service:. From 1point 3acres bbs
+class QueryCounterService {
+
+  void addCount(String query) {
+    // add query count + 1. 1point 3acres 论坛
+  }
+
+  int getCount(String query) {
+    // return current query count
+  }
+  List<String> getTopKFrequentQueries(int k) {
+    // get current top most frequent k queries sorted by the counter
+  }
+}
+
+lz说了O(1), O(1), O(n) 和O(logn), O(logn), O(logn)两种方法，小哥说好，有没有更快的，要求O(1), O(1), O(k). lz吃了一惊, O(k)的实在想不出，期间祭出了quickselect求topk, 这也要O(n)吧，后来小哥看我支支吾吾想不出来了, 干脆给了个提示: 每次插的时候和前一个比较，如果frequency大的话就前后互换, 否则不动。lz想了一下感觉行，小哥说用什么数据结构实现，lz说map还是要的，在来个数组存query的位置，不过数组不能随意扩展，后来终于想到了linkedList, 真是蠢哭了。。。最后这题其实就是一个Map+linkedList的结构(类似LRU cache), 多亏了小哥一直耐心给hint, 不然真心想不出啊.之后follow up了一下单机query存不下怎么办， 还问了service挂掉了怎么recover。最后留了10分钟问了点问题结束。
+
+
+1. What if a query can't be stored in single machine?
+2. What if a service is down?
+3. 
+
+
+1. missing the :
+2. missing the len() for matrix
+
+
+ToDo:
+
+1. maze II - https://leetcode.com/problems/the-maze-ii/description/
+2. next greater element II   https://leetcode.com/problems/next-greater-element-ii/description/
+3. next greater element III  https://leetcode.com/problems/next-greater-element-iii/
+4. Decode String
+
+
+
+6. 给一个two D garden , 每一个slot可以是flower或者Wall. 找一个合适的位置，让游客可以看到最多的flower.可以站在flower上，不能站在墙上。。
+如果被墙挡了，就看不到墙后面的花。然后游客只能竖直或者水瓶看，不能看对角线。。比如
+[[f, x, x, w, f],
+ [f, f, x ,x ,x],.留学论坛-一亩-三分地
+ [x, x, f, w, f],
+ [f, f, x, w, x]]
+
+
+
+
+这样，{3, 0} 和 {1,4}都能看到四朵花。. more info on 1point3acres
+. visit 1point3acres for more.
+找一个点能看到最多的花
+
+
+每张卡片都有一个值，给定一堆卡片从一头拿，每次可以拿一到三张，两人轮流拿，求最高得 分。考虑卡片值为负的情况。
+dp[i] is the max score of current player choosing from arr[i] to arr[n - 1]
+dp[i] = sum[i] - dp[i + k], 1 <= k <= 3, sum[i] is sum of arr[i] to arr[n - 1]
+return max(dp[0], sum[0] - dp[0]), because dp[0] is the max score of player1, and sum[0] - dp[0] is the max score of player2.
+
+
+给了一堆log，log里有用户id，resource id以resource在某个起始时间和终止时间的使用量，比如 用户abc在1到5秒钟使用了CPU的数量是2，用户abc在2到3秒使用的CPU数量是4，也就是一个 用户对某个resource的使用在某个时间是可以叠加的， 给定一个resource id，根据用户对这个 resource的peak使用量，找到top k的用户 。上面的例子中abc的CPU的peak使用量是2+4=6
+follow up:如果数据量很大怎么办。
+这题就是找根据resource id，找到每个user的这个resource的使用情况，然后根据start，end time 排序，从左到右扫，每个时间段，开始时间标识+1，结束时间标识-1，记录最大值即可。 每个log按照开始结束分成2段，(int time, int cpu, boolean isStart)，然后排序，扫描即可。
+Follow up: 数据量很大的问题也没有太好的办法，如果时间范围跨总体很小的话，可以用 map-reduce。
+
+
+
+数组1是排好序的1-n个数字，数组2是根据数组1 shuffle得出，给定数组3，要求根据一样的 shuffle规则变换成数组4，输出数组4。
+第一个follow up，如果数组一是无重复数字组成的无序数组，如何做
+第二个follow up，数组1有重复。
+
+假如arr1 = {1, 2, 3, 4}, arr2 = {4, 2, 1, 3}
+首先需要预处理arr2，得到val2NewIndex map 然后遍历arr1，新建index2NewIndex，那么index2NewIndex.put(i, val2NewIndex.get(a[i])) 对于arr3，根据index2NewIndex逐个填写元素到arr4中即可。
+Follow-up 1
+跟上面做法相同
+Follow-up 2
+将val2NewIndex map的每个值变成List<Integer>就行了
+
+
+一个BST里面存着整数，要求写一个算法，计算树里面在(low, high)之间的数字的和 (low < val <=
+high)。
+可以inorder得到sorted arr，然后遍历，O(n)
+可以利用BST特性进行二分查找
+
+
+(高频)Triangle array search
+定义是先increase后decrease，无duplicate，要求 - 判断是否是triangle sorted:iteration O(n) - 找min:O(1)
+- 找max peak:binary search, O(logn)
+- 找target number:按照peak位置分成两半，然后二分，O(log n)
+
+
+
+1。 扫地机器人  -- http://www.1point3acres.com/bbs/thread-317571-1-1.html
+2. decode string
+3. 一片楼房有高度，在一个矩阵里。从正面和侧面分别都可以得到一个侧影的高度。在不影响正面侧面的高度的情况下，最大的高度和. 一亩-三分-地，独家发布
+思路，比较下每一组高度的最小值，和即为所求
+4. 第四轮是美国小哥，很朋克的那种，披头散发，简单聊聊就开写，LZ77压缩算法。
+大概是 原：ABRA DABRA KADABRA 压缩后:ABRA D|tag|len|offset| KA|tag|len|offset 有压缩后的字符串，还原原来的。时间复杂度O(N) 。tag就是一个标记，len是引用了多长，offset是这个字符串往前数多少个是同一个字符串。这个有一定的小trick，一个是会有地址偏移，一个是可以引用引用，如例子所示。要考虑引用的地址偏移
+followup原文中遇到tag怎么办.我的答案|tag|tag
+考官答案|tag|0 压缩效率更好. more info on 1point3acres
+写出来了之后还有几分钟聊天时间。
+. visit 1point3acres for more.
+
+5. 第五轮是印度妹子，声音很轻。题都不难，两个基础题，一个是字符矩阵中，只能上下左右，找到完整的目标单词。 来源一亩.三分地论坛. 
+我首先说要一个visited数组记录，然后妹子就问举个例子，然后就想啊想，想出来，比如pop这样的，需要visited。
+然后就开始写了。
+第二道题是用链表模拟数字+1的操作。
+
+1. 想好再coding -- 利用白板表达自己
+2. Test cases -- 一定要run
+
+
+
+http://www.1point3acres.com/bbs/thread-394308-1-1.html
+1. 删除一个树里的几个节点，返回森林的根节点。这题卡了一会，搞清逻辑了最后还是写出来了。
+2. 在一个sorted array中找第k个缺失元素。比如[2,3,5,7], k = 0: 返回4， k = 1：返回6. 这题写出来了但是没有时间查bug
+3. 在一个由从1到n元素组成的n+1长的数列中输出任意一个有重复的元素。这题需要写出四种写法。并且会考察test case。我以前一直没注意过testcase，就考官的思路是，test case要覆盖程序的所有branch。这点非常重要
+
+
+1. sunnyvale
+
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=433913&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3089%5D%5Bvalue%5D%5B3%5D%3D3%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%3D1%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+
+2. 
+
+
+2. 你们组或者部门学习机会怎样？比如tech stack、做的方向？
+和Ads Revenue相关的Payments. 用得都是Google内部batch processing的东西，Flume, Spanner, BigTable, etc.
+3. 你们组或者部门影响力如何？比如busness impact、做的东西边缘还是核心？
+因为直接面向用户，所以产品气息特别浓，适合做产品的人。Business Impact很大，但是业务逻辑很重。做得东西还是很核心的。
+
+是18个月内换组需要双方组Manager同意，18个月之后只需要对方Manager同意收人
+换组慎重：乱换组，晚Promote，因为新组老板不会因为你旧组的活表扬你
+
+如果是T3的话，最后能升一级再转，否则的话，你在旧组干的活，去了新组，还得重新累计credit, 延迟promote。
+
+
+
+
+
+
